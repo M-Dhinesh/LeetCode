@@ -1,5 +1,2 @@
-class Solution:
-    def sortPeople(self, names: List[str], heights: List[int]) -> List[str]:
-        lst = list(zip(heights,names))
-        lst.sort(reverse = True, key = lambda x : x[0])
-        return [name for _,name in lst]
+def sort_people_by_height(names, heights):
+    return [name for _, name in sorted(zip(heights, names), reverse=True, key=lambda x: x[0])]
