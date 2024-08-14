@@ -1,3 +1,18 @@
 class Solution:
-    def smallestDistancePair(self, nums: List[int], k: int) -> int: 
-        return sorted([abs(i[0]-i[1]) for i in combinations(nums,2)])[k-1]
+    def smallestDistancePair(self, nums: List[int], k: int) -> int:
+        nums.sort()
+        low, high = 0, nums[-1] - nums[0]
+        while low < high:
+            mid = (low + high) // 2
+            if self.countPairs(nums, mid) < k:
+                low = mid + 1
+            else:
+                high = mid   
+        return low
+    def countPairs(self, nums: List[int], distance: int) -> int:
+        count = left = 0
+        for right in range(1, len(nums)):
+            while nums[right] - nums[left] > distance:
+                left += 1
+            count += right - left
+        return count
